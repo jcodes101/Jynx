@@ -1,0 +1,66 @@
+body {
+    background-color: var(--white);
+    margin: 0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap; /* Allow columns to wrap on smaller screens */
+    width: 100%;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.column-60 {
+    width: 80%;
+    padding: 20px; /* Set the width for the column */
+    margin: auto;
+}
+
+
+
+.linktree-container {
+    text-align: center; /* Center the content within the container */
+}
+
+.linktree-container img {
+    max-width: 100%; /* Ensure the image does not exceed the container width */
+    height: auto; /* Maintain the aspect ratio */
+    background-color: #34c759; /* Green color, you can change this */
+    border-radius: 8px; /* Adjust the border radius for rounded corners */
+    padding: 20px; /* Add padding for spacing */
+}
+
+
+h1 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.notice {
+    color: white;
+    font-family: 'Poppins';
+}
+
+.button-1 {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    background-color: var(--blue);
+    color: white;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.button-1:hover {
+    background-color: var(--dark);
+}
+
+
+@media only screen and (max-width: 1067px) {
+    /* Add any specific styling for smaller screens here */
+
+
+}
