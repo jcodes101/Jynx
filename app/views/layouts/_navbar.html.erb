@@ -5,7 +5,7 @@
         <%= link_to image_tag("linkcon.svg", alt: "Logo", style: "width: 40px;"), home_index_path %>
     </div>
     <div class="navbar-links">
-        <%#= link_to "Pricing", home_pricing_path, class: "nav-link" %>
+        <%= link_to "The Creator", home_creator_path, class: "nav-link" %>
 
         <% if user_signed_in? %>
             <div class="navbar-user">
@@ -20,6 +20,7 @@
                 <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
 
                 <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            
             </div>
         <% end %>
     </div>
