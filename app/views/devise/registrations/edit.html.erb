@@ -1,45 +1,60 @@
 <%= stylesheet_link_tag "devise" %>
 
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="row">
+    <div class="column column-65">
+<p style="font-size: 48px; font-weight: bold; text-align:center; margin-bottom: 10px;">Edit <%= resource_name.to_s.humanize %></p>
+
+    <div class="form">
+
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field-input" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
-
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.label :password %>
     <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+    <!-- <em>(<%= @minimum_password_length %> characters minimum)</em> -->
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password", class: "field-input" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
+<div class="field">
+    <%= f.label :password_confirmation, class: "field-label" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "field-input" %>
+</div>
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.password_field :current_password, autocomplete: "current-password", class: "field-input" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Save changes", class:"button-1", style:"width: 70%;" %>
   </div>
+
 <% end %>
 
-<h3>Cancel my account</h3>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+<div>Unhappy? <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
-<%= link_to "Back", :back %>
+<%= link_to "Back", :back %>  
+
+        <!-- Content for the first column goes here -->
+    </div>
+      <div style="text-align: center; margin-top: 10px;">
+  <%= render "devise/shared/links" %>
+  </div>
+    </div>
+    <div class="column column-35">
+        <h2>Column 2 (35%)</h2>
+        <!-- Content for the second column goes here -->
+    </div>
+</div>

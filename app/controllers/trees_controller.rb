@@ -14,7 +14,12 @@ class TreesController < ApplicationController
 
   # GET /trees/new
   def new
-    @tree = Tree.new
+    if current_user.tree.present?
+      @notice = "You already have a tree assigned to you."
+      redirect_to current_user.tree
+    else
+      @tree = Tree.new
+    end
   end
 
   # GET /trees/1/edit
