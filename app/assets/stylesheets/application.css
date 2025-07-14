@@ -8,3 +8,95 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+
+:root {
+    --grey: #BAC1B8;
+    --blue: #295bb0;
+    --green: #0C7C59;
+    --dark: #2B303A;
+    --orange: #D64933;
+  }
+
+  body
+  {
+    font-family: 'poppins'; 
+    margin: 0px;
+  }
+ /* CSS */
+.button-1 {
+
+  font-family:'Poppins', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-1:hover {
+  background-color: #fff;
+}
+
+.button-1:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-1 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+.button-1 {
+
+  font-family:'Poppins', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-1:hover {
+  background-color: #fff;
+}
+
+.button-1:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-1 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}

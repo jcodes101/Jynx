@@ -15,4 +15,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "home#index"
+
+  devise_scope :user do
+    # get '/users', to: 'devise/registrations#new'
+    # get '/users/password', to: 'devise/passwords#new'
+    #
+    # Jcodes-Comment: the sign_out root is matched to the controller
+    get "/users/sign_out" => "devise/sessions#destroy"
+  end
 end
