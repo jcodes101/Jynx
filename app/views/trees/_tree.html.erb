@@ -1,37 +1,81 @@
-<div id="<%= dom_id tree %>">
-  <p>
-    <strong>Name:</strong>
-    <%= tree.name %>
-  </p>
+<div class="linktree"id="<%= dom_id tree %>" style="text-align:center; padding: 20px;   ">
 
-  <p>
-    <strong>X:</strong>
-    <%= tree.x %>
-  </p>
+    <h1 style="text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"> <%= tree.name %> </h1>
 
-  <p>
-    <strong>Instagram:</strong>
-    <%= tree.instagram %>
-  </p>
 
-  <p>
-    <strong>Youtube:</strong>
-    <%= tree.youtube %>
-  </p>
 
-  <p>
-    <strong>Github:</strong>
-    <%= tree.github %>
-  </p>
+<% attributes_to_display = {
 
-  <p>
-    <strong>User:</strong>
-    <%= tree.user_id %>
-  </p>
+     "Instagram" => tree.instagram,
+     "X" => tree.x,
+     "Youtube" => tree.youtube,
 
-  <p>
-    <strong>Style:</strong>
-    <%= tree.style %>
-  </p>
 
+
+   }
+
+attributes_to_display.each do |label, value|
+  if value.present? %>
+<!-- <strong><%= label %>:</strong> -->
+<div style="margin-top: 20px; display: block;  padding: 10px; border-radius: 8px; transition: box-shadow 0.3s ease;">
+  <%= link_to "#{value}", value, style: "text-decoration: none;", class:"link" %>
 </div>
+
+ <% end end %>
+</div>
+
+<style>
+<% if tree.style == "light"%>
+
+.linktree
+{
+  background-color: white;
+  color: black;
+}
+.link
+{
+  color: blue;
+}
+
+<% end %>
+<% if tree.style == "dark"%>
+
+.linktree
+{
+  background-color: black;
+  color: white;
+}
+.link
+{
+  color: orange;
+}
+
+<% end %>
+<% if tree.style == "rainbow"%>
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.linktree
+{
+  background: linear-gradient(90deg, violet, indigo, blue, green, yellow, orange, red);
+  background-size: 150% 150%;
+  animation: rainbow 5s infinite; /* Adjust the duration as needed */
+  color: black;
+}
+
+.link
+{
+  color: black;
+}
+
+<% end %>
+</style>
+

@@ -1,0 +1,65 @@
+.field-input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid var(--grey);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.container
+{
+    width: 70%;
+    margin: auto;
+}
+
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    
+  }
+
+  .card {
+    width: 200px;
+    position: relative;
+    height: 150px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    border: 1px solid black;
+  }
+
+
+  .card:active {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Additional styles for dark-mode and rainbow-mode as needed */
+  
+  /* Add specific styling for the green box shadow */
+  .card[selected] {
+    box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.8);
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+  .card-container
+  {
+
+    justify-content: center;
+    align-items: center;
+
+    margin: 0;
+    position: relative;
+  }
+  

@@ -1,16 +1,28 @@
+  <%= stylesheet_link_tag "trees" %>
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Trees" %>
+<div class="container">
 
-<h1>Trees</h1>
 
-<div id="trees">
-  <% @trees.each do |tree| %>
-    <%= render tree %>
-    <p>
-      <%= link_to "Show this tree", tree %>
-    </p>
-  <% end %>
+
+<% if user_signed_in?%>
+
+  <%# if current_user.tree.present? %>
+  
+ <%#= link_to "View my tree", current_user.tree, class: "button-1", target: "_blank" %>
+  <%# else %>
+
+  <%= link_to "Create your own Link Tree", new_tree_path, class: "button-1", target: "_blank" %>
+  <%# end %>
+
+
+
+
+
+
+<% else %>
+<%= link_to "Create your own Link Tree",  new_user_registration_path, class:"button-1", target: "_blank"%>
+
+<% end %>
+
 </div>
-
-<%= link_to "New tree", new_tree_path %>

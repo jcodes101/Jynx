@@ -1,0 +1,41 @@
+.row {
+    display: flex;
+    width: 100%;
+    font-family: 'poppins'
+}
+
+.column-65 {
+    flex: 65%;
+    background-color: white; /* Adjust color as needed */
+   
+}
+
+.column-35 {
+    flex: 35%;
+/* Adjust color as needed */
+    color: white;
+    margin-top: 40px;
+}
+
+.form
+{
+    margin-left: 20%;
+}.field {
+    margin-bottom: 20px;
+}
+
+.field-label {
+    display: block;
+    font-size: 14px;
+    color: var(--dark);
+
+}
+
+.field-input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid var(--grey);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}

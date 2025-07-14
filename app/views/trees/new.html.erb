@@ -1,11 +1,17 @@
-<% content_for :title, "New tree" %>
+<%= stylesheet_link_tag "trees" %>
 
-<h1>New tree</h1>
+<div class="container">
+
+
+
+
 
 <%= render "form", tree: @tree %>
 
 <br>
-
+<!--
 <div>
   <%= link_to "Back to trees", trees_path %>
+</div>
+--->
 </div>

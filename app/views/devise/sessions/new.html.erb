@@ -1,14 +1,26 @@
-<h2>Log in</h2>
+
+
+
+<%= stylesheet_link_tag "devise" %>
+
+<div class="row">
+    <div class="column column-65">
+<p style="font-size: 48px; font-weight: bold; text-align:center; margin-bottom: 10px;">Welcome back</p>
+<p style="font-size: 16px; text-align:center; color: grey;">Log in to your Linktree</p>
+    <div class="form">
+
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field-input" %>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "field-input" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -18,9 +30,22 @@
     </div>
   <% end %>
 
+
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", class:"button-1", style:"width: 70%;" %>
   </div>
+
 <% end %>
 
-<%= render "devise/shared/links" %>
+
+        <!-- Content for the first column goes here -->
+    </div>
+      <div style="text-align: center; margin-top: 10px;">
+  <%= render "devise/shared/links" %>
+  </div>
+    </div>
+    <div class="column column-35">
+              <%#= image_tag("king.svg", style:"width: 500px;")%>
+        <!-- Content for the second column goes here -->
+    </div>
+</div>
