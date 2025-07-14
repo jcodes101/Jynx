@@ -1,30 +1,24 @@
-<!-- Your existing stylesheet link tag -->
-<%= stylesheet_link_tag 'index', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="index-page">
+  <div class="row">
+    <p class="notice"> <%#= notice %> </p>
 
+    <div class="column column-60">
+      <div class="content-container">
+        <div class="text-content">
+          <h1>One link. Infinite possibilities.</h1>
+          <p>Jynx lets you showcase everything you create, promote, and share — all from a single, powerful bio link. Perfect for creators, brands, and everyone in between.</p>
 
-
-<!-- Your existing HTML structure -->
-
-<div class="row">
-  <p class="notice"> <%#= notice %> </p>
-
-  <div class="column column-60">
-    <div class="content-container">
-      <div class="text-content">
-        <h1>Everything you are. In one, simple link in bio.</h1>
-        <p>Join 40M+ people using Linktree for their link in bio. One link to help you share everything you create, curate and sell from your Instagram, TikTok, Twitter, YouTube, and other social media profiles.</p>
-
-        <% if user_signed_in? %>
-          <% if current_user.tree.present? %>
-            <%= link_to "View my tree", current_user.tree, class: "button-1", target: "_blank" %>
+          <% if user_signed_in? %>
+            <% if current_user.tree.present? %>
+              <%= link_to "View my tree", current_user.tree, class: "button-1", target: "_blank" %>
+            <% else %>
+              <%= link_to "Create your own Link Tree", new_tree_path, class: "button-1", target: "_blank" %>
+            <% end %>
           <% else %>
-            <%= link_to "Create your own Link Tree", new_tree_path, class: "button-1", target: "_blank" %>
+            <%= link_to "Create your own Link Tree", new_user_registration_path, class: "button-1", target: "_blank" %>
           <% end %>
-        <% else %>
-          <%= link_to "Create your own Link Tree", new_user_registration_path, class: "button-1", target: "_blank" %>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
-
 </div>
