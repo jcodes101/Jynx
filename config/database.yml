@@ -95,6 +95,8 @@ production:
     database: j_tree_production
     username: j_tree
     password: <%= ENV["J_TREE_DATABASE_PASSWORD"] %>
+    host: <%= ENV["DATABASE_HOST"] %>
+    port: 5432
   cache:
     <<: *primary_production
     database: j_tree_production_cache
@@ -104,7 +106,14 @@ production:
     database: j_tree_production_queue
     migrations_paths: db/queue_migrate
   cable:
-    url: <%= ENV["DATABASE_URL"] %>
     <<: *primary_production
-    database: j_tree_production_cable
-    migrations_paths: db/cable_migrate
+    database: j_tree_development_cable
+    adapter: postgresql
+    username: <%= ENV["DATABASE_USERNAME"] %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
+    host: <%= ENV["DATABASE_HOST"] %>
+
+    # url: <%= ENV["DATABASE_URL"] %>
+    # <<: *primary_production
+    # database: j_tree_production_cable
+    # migrations_paths: db/cable_migrate
