@@ -108,6 +108,11 @@ production:
   cable:
     <<: *primary_production
     database: j_tree_production_cable
+    adapter: postgresql
+    username: <%= ENV["J_TREE_DATABASE_USERNAME"] || ENV["DATABASE_USERNAME"] || 'j_tree' %>
+    password: <%= ENV["J_TREE_DATABASE_PASSWORD"] || ENV["DATABASE_PASSWORD"] %>
+    host: <%= ENV["DATABASE_HOST"] %>
+    port: 5432
     # adapter: postgresql
     # username: <%= ENV["DATABASE_USERNAME"] %>
     # password: <%= ENV["DATABASE_PASSWORD"] %>
