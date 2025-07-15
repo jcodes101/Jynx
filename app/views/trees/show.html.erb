@@ -1,6 +1,8 @@
 <%= stylesheet_link_tag "trees" %>
 <p style="color: green"><%= notice %></p>
 
+<p>Selected style: <%= @tree.style %></p>
+
 <div class="container">
   <div class="<%= @tree.style %>-theme">
     <%= render @tree %>

@@ -157,18 +157,18 @@
 
 <!-- JavaScript to toggle visibility -->
 <script>
-function handleCardClick(style) {
-  // Remove the selection from all cards
-  document.querySelectorAll('.style-card').forEach(function(card) {
-    card.classList.remove('selected');
-  });
+// function handleCardClick(style) {
+//   // Remove the selection from all cards
+//   document.querySelectorAll('.style-card').forEach(function(card) {
+//     card.classList.remove('selected');
+//   });
 
-  // Add selection to the clicked card
-  document.getElementById(style + '-card').classList.add('selected');
+//   // Add selection to the clicked card
+//   document.getElementById(style + '-card').classList.add('selected');
 
-  // IMPORTANT: Actually check the radio button
-  document.getElementById(style).checked = true;
-}
+//   // IMPORTANT: Actually check the radio button
+//   document.getElementById(style).checked = true;
+// }
 
 $(document).ready(function() {
   $("#next-btn").on("click", function() {
@@ -268,6 +268,8 @@ function handleCardClick(style) {
 
   // Add selection to the clicked card
   document.getElementById(style + '-card').classList.add('selected');
+
+  document.getElementById(style).checked = true;
 }
 </script>
 
