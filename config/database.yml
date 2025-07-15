@@ -89,36 +89,38 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  <<: *default
   url: <%= ENV["DATABASE_URL"] %>
-  primary: &primary_production
-    <<: *default
-    database: j_tree_production
-    username: j_tree
-    password: <%= ENV["J_TREE_DATABASE_PASSWORD"] %>
-    host: <%= ENV["DATABASE_HOST"] %>
-    port: 5432
-  cache:
-    <<: *primary_production
-    database: j_tree_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: j_tree_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: j_tree_production_cable
-    adapter: postgresql
-    username: <%= ENV["J_TREE_DATABASE_USERNAME"] || ENV["DATABASE_USERNAME"] || 'j_tree' %>
-    password: <%= ENV["J_TREE_DATABASE_PASSWORD"] || ENV["DATABASE_PASSWORD"] %>
-    host: <%= ENV["DATABASE_HOST"] %>
-    port: 5432
-    # adapter: postgresql
-    # username: <%= ENV["DATABASE_USERNAME"] %>
-    # password: <%= ENV["DATABASE_PASSWORD"] %>
-    # host: <%= ENV["DATABASE_HOST"] %>
+  # url: <%= ENV["DATABASE_URL"] %>
+  # primary: &primary_production
+  #   <<: *default
+  #   database: j_tree_production
+  #   username: j_tree
+  #   password: <%= ENV["J_TREE_DATABASE_PASSWORD"] %>
+  #   host: <%= ENV["DATABASE_HOST"] %>
+  #   port: 5432
+  # cache:
+  #   <<: *primary_production
+  #   database: j_tree_production_cache
+  #   migrations_paths: db/cache_migrate
+  # queue:
+  #   <<: *primary_production
+  #   database: j_tree_production_queue
+  #   migrations_paths: db/queue_migrate
+  # cable:
+  #   <<: *primary_production
+  #   database: j_tree_production_cable
+  #   adapter: postgresql
+  #   username: <%= ENV["J_TREE_DATABASE_USERNAME"] || ENV["DATABASE_USERNAME"] || 'j_tree' %>
+  #   password: <%= ENV["J_TREE_DATABASE_PASSWORD"] || ENV["DATABASE_PASSWORD"] %>
+  #   host: <%= ENV["DATABASE_HOST"] %>
+  #   port: 5432
+  # adapter: postgresql
+  # username: <%= ENV["DATABASE_USERNAME"] %>
+  # password: <%= ENV["DATABASE_PASSWORD"] %>
+  # host: <%= ENV["DATABASE_HOST"] %>
 
-    # url: <%= ENV["DATABASE_URL"] %>
-    # <<: *primary_production
-    # database: j_tree_production_cable
-    # migrations_paths: db/cable_migrate
+  # url: <%= ENV["DATABASE_URL"] %>
+  # <<: *primary_production
+  # database: j_tree_production_cable
+  # migrations_paths: db/cable_migrate
