@@ -107,11 +107,11 @@ production:
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: j_tree_development_cable
-    adapter: postgresql
-    username: <%= ENV["DATABASE_USERNAME"] %>
-    password: <%= ENV["DATABASE_PASSWORD"] %>
-    host: <%= ENV["DATABASE_HOST"] %>
+    database: j_tree_production_cable
+    # adapter: postgresql
+    # username: <%= ENV["DATABASE_USERNAME"] %>
+    # password: <%= ENV["DATABASE_PASSWORD"] %>
+    # host: <%= ENV["DATABASE_HOST"] %>
 
     # url: <%= ENV["DATABASE_URL"] %>
     # <<: *primary_production
