@@ -1,41 +1,398 @@
-.row {
+/* Devise pages specific styles */
+.devise-page {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a0a 100%);
+    margin: 0;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    min-height: 100vh;
+    color: #ffffff;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.devise-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(139, 69, 196, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(75, 0, 130, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 40% 90%, rgba(139, 69, 196, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Balanced sidebar effects */
+.devise-page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 100vh;
+    background: linear-gradient(90deg, 
+        rgba(139, 69, 196, 0.12) 0%, 
+        rgba(139, 69, 196, 0.08) 30%, 
+        transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.devise-page .right-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 100vh;
+    background: linear-gradient(270deg, 
+        rgba(139, 69, 196, 0.12) 0%, 
+        rgba(139, 69, 196, 0.08) 30%, 
+        transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.devise-page .row {
     display: flex;
     width: 100%;
-    font-family: 'poppins'
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
 }
 
-.column-65 {
+.devise-page .column-65 {
     flex: 65%;
-    background-color: white; /* Adjust color as needed */
-   
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(139, 69, 196, 0.1);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-.column-35 {
+.devise-page .column-65::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.devise-page .column-35 {
     flex: 35%;
-/* Adjust color as needed */
     color: white;
-    margin-top: 40px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(139, 69, 196, 0.03);
+    backdrop-filter: blur(10px);
+    position: relative;
 }
 
-.form
-{
-    margin-left: 20%;
-}.field {
-    margin-bottom: 20px;
+.devise-page .column-35::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(139, 69, 196, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
 }
 
-.field-label {
+.devise-page .form {
+    margin: 0 auto;
+    max-width: 400px;
+    width: 100%;
+}
+
+.devise-page .form-title {
+    font-size: 48px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff, #c0c0c0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.devise-page .form-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(135deg, #8b45c4, #4b0082);
+    border-radius: 2px;
+}
+
+.devise-page .form-subtitle {
+    font-size: 16px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 30px;
+}
+
+.devise-page .field {
+    margin-bottom: 25px;
+}
+
+.devise-page .field-label {
     display: block;
     font-size: 14px;
-    color: var(--dark);
-
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+    font-weight: 500;
 }
 
-.field-input {
-    width: 70%;
-    padding: 10px;
-    border: 1px solid var(--grey);
-    border-radius: 4px;
+.devise-page .field-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgba(139, 69, 196, 0.3);
+    border-radius: 8px;
     box-sizing: border-box;
     font-size: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.devise-page .field-input:focus {
+    outline: none;
+    border-color: rgba(139, 69, 196, 0.6);
+    box-shadow: 0 0 0 3px rgba(139, 69, 196, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.devise-page .field-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.devise-page .button-1 {
+    background: linear-gradient(135deg, #8b45c4, #4b0082) !important;
+    color: white !important;
+    text-decoration: none;
+    padding: 15px 30px !important;
+    border: 1px solid rgba(139, 69, 196, 0.3) !important;
+    border-radius: 8px !important;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(139, 69, 196, 0.3) !important;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    display: block !important;
+    line-height: normal !important;
+    min-width: auto !important;
+}
+
+.devise-page .button-1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.devise-page .button-1:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(139, 69, 196, 0.5) !important;
+    background: linear-gradient(135deg, #9d52d4, #5a0a96) !important;
+}
+
+.devise-page .button-1:hover::before {
+    left: 100%;
+}
+
+.devise-page .button-1:active {
+    transform: translateY(0) !important;
+    box-shadow: #422800 0px 0px 0 0 !important;
+}
+
+.devise-page .form-footer {
+    text-align: center;
+    margin-top: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.devise-page .devise-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.devise-page .devise-links a {
+    color: rgba(139, 69, 196, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.devise-page .devise-links a:hover {
+    color: #8b45c4;
+    text-decoration: underline;
+}
+
+/* Error messages styling */
+.devise-page .error-messages {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #ff6b6b;
+    backdrop-filter: blur(10px);
+}
+
+.devise-page .error-messages h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #ff6b6b;
+}
+
+.devise-page .error-messages ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.devise-page .error-messages li {
+    margin-bottom: 5px;
+}
+
+/* Notice/alert styling */
+.devise-page .notice {
+    background: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #4caf50;
+    backdrop-filter: blur(10px);
+}
+
+.devise-page .alert {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #ffc107;
+    backdrop-filter: blur(10px);
+}
+
+/* Add this to your existing devise.css file */
+
+.devise-page .gradient-text {
+    background: linear-gradient(135deg, 
+        rgba(20, 20, 20, 0.9) 0%,     /* Dark charcoal with opacity */
+        rgba(40, 40, 40, 0.85) 20%,   /* Slightly lighter dark */
+        rgba(75, 0, 130, 0.8) 60%,    /* Indigo purple */
+        rgba(139, 69, 196, 0.9) 100%  /* Your existing purple */
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+/* Alternative version with more dramatic dark-to-purple transition */
+.devise-page .gradient-text-alt {
+    background: linear-gradient(135deg, 
+        rgba(10, 10, 10, 0.95) 0%,     /* Very dark with high opacity */
+        rgba(30, 15, 30, 0.9) 30%,     /* Dark purple-tinted */
+        rgba(60, 30, 80, 0.85) 60%,    /* Medium purple */
+        rgba(139, 69, 196, 0.9) 100%   /* Bright purple */
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+/* Add a subtle glow effect to make it stand out more */
+.devise-page .gradient-text::before {
+    content: 'Jynx';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(135deg, 
+        rgba(20, 20, 20, 0.3) 0%,
+        rgba(139, 69, 196, 0.4) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(2px);
+    z-index: -1;
+}
+
+/* Mobile responsiveness */
+@media only screen and (max-width: 768px) {
+    .devise-page .row {
+        flex-direction: column;
+    }
+
+    .devise-page .column-65,
+    .devise-page .column-35 {
+        flex: none;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .devise-page .form-title {
+        font-size: 36px;
+    }
+
+    .devise-page .form {
+        max-width: none;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .devise-page .column-65,
+    .devise-page .column-35 {
+        padding: 15px;
+    }
+
+    .devise-page .form-title {
+        font-size: 32px;
+    }
+
+    .devise-page .field-input {
+        padding: 12px;
+    }
+
+    .devise-page .button-1 {
+        padding: 12px 24px;
+    }
 }
