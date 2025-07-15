@@ -71,7 +71,8 @@ class TreesController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
+    # Only allow a list of trusted parameters through.
     def tree_params
-      params.expect(tree: [ :name, :x, :instagram, :youtube, :github, :user_id, :style ])
+      params.require(:tree).permit(:name, :x, :instagram, :youtube, :github, :user_id, :style)
     end
 end
