@@ -2,11 +2,33 @@
 
 <div class="container">
 
-
-
-
-
 <%= render "form", tree: @tree %>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Function to toggle field visibility
+  function toggleField(checkboxId, fieldId) {
+    const checkbox = document.getElementById(checkboxId);
+    const field = document.getElementById(fieldId);
+    
+    if (checkbox && field) {
+      // Set initial state
+      field.style.display = checkbox.checked ? "block" : "none";
+      
+      // Add change listener
+      checkbox.addEventListener("change", function() {
+        field.style.display = checkbox.checked ? "block" : "none";
+      });
+    }
+  }
+  
+  // Initialize all social media toggles
+  toggleField("showInstagramCheckbox", "instagramField");
+  toggleField("showXCheckbox", "xField");
+  toggleField("showYoutubeCheckbox", "youtubeField");
+  toggleField("showGithubCheckbox", "githubField");
+});
+</script>
 
 <br>
 <!--

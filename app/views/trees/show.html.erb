@@ -2,16 +2,18 @@
 <p style="color: green"><%= notice %></p>
 
 <div class="container">
-<%= render @tree %>
+  <div class="<%= @tree.style %>-theme">
+    <%= render @tree %>
+  </div>
 
-<% if user_signed_in? %>
-<% if current_user.id == @tree.user_id %>
-<div style="margin-top: 20px;">
-  <%= link_to "Edit this tree", edit_tree_path(@tree), class:"button-1" %> 
-  <%#= link_to "Back to trees", trees_path %>
+  <% if user_signed_in? %>
+    <% if current_user.id == @tree.user_id %>
+      <div style="margin-top: 20px;">
+        <%= link_to "Edit this Jynx", edit_tree_path(@tree), class:"button-1" %> 
+        <%#= link_to "Back to trees", trees_path %>
 
-  <%= button_to "Delete my tree", @tree, method: :delete, class:"button-1", style:"margin-top: 20px;" %>
-</div>
-<% end %>
-<% end %>
+        <%= button_to "Delete my Jynx", @tree, method: :delete, class:"button-1", style:"margin-top: 20px;" %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

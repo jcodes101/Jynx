@@ -1,10 +1,11 @@
 <%= form_with(model: tree, html: { id: 'tree-form' }) do |form| %>
 
-
+<div class="tree-form-page">
+  <div class="right-sidebar"></div>
+  
   <% if tree.errors.any? %>
-    <div style="color: red">
+    <div class="error-messages">
       <h2><%= pluralize(tree.errors.count, "error") %> prohibited this tree from being saved:</h2>
-
       <ul>
         <% tree.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -13,284 +14,833 @@
     </div>
   <% end %>
 
-<!-- First part -->
-<!-- First part -->
-<div id="first-part">
-<h1 style="font-size: 50px;">Welcome to Linktree</h1>
+  <!-- First part -->
+  <div id="first-part" class="form-section">
+    <div class="form-container">
+      <h1 class="form-title">Welcome to <span class="gradient-text">Jynx</span></h1>
+      <p class="form-subtitle">Your personalized link page</p>
 
-  <h3 class="Input-label" style="margin-bottom: 25px;">What's your name</label>
-  <div class="Input">
-    <%= form.text_field :name, id:"name", class: "Input-text", placeholder: "linktr.ee/trees/yourname"%>
-  </div>
+      <div class="field">
+        <label class="field-label">What's your name?</label>
+        <div class="Input">
+          <%= form.text_field :name, id:"name", class: "field-input", placeholder: "linktr.ee/trees/yourname"%>
+        </div>
+      </div>
 
+      <div class="error-text" id="name-text" style="display:none;">
+        <p>Name must be more than 3 characters long</p>
+      </div>
 
-  <h5 style="color: red; display:none;" id="name-text"> Name must be more than 3 characters long </h3>
+      <div style="display: none;">
+        <%= form.label :user_id %>
+        <%= form.number_field :user_id, value: current_user.id %>
+      </div>
 
-  <div>
-    <%= form.label :user_id, style: "display: none" %>
-    <%= form.number_field :user_id, value: current_user.id, style: "display: none" %>
-  </div>
-
-  <div style="margin-top: 20px;">
-    <button id="next-btn" type="button" class="button-1"> Next </button>
-  </div>
-</div>
-
-<!-- Second part -->
-<div id="second-part" style="display: none;">
- <h1 style="font-size: 50px">Tell us about yourself</h1>
-<style>
-
-</style>
-
-<div class="inline-form-group">
-  <%= form.label :instagram, "Instagram", style: "display: block" %>
-  <%= form.check_box :show_instagram, id: "showInstagramCheckbox" %>
-</div>
-<div class="inline-form-group">
-  <%= form.label :youtube, "Youtube", style: "display: block" %>
-  <%= form.check_box :show_youtube, id: "showYoutubeCheckbox" %>
-</div>  
-<div class="inline-form-group">
-  <%= form.label :x, "X", style: "display: block" %>
-  <%= form.check_box :show_x, id: "showXCheckbox" %>
-</div>
-
-
-
-
-
-<div id="instagramField" class="input" style="display: none;">
-  <h3 class="Input-label" style="margin-bottom: 25px; display: block; width: 100%;">Instagram</h3>
-  <%= form.text_field :instagram, class: "Input-text", placeholder:"https://instagram/@yourinstagramhandle.com" %>
-</div>
-
-<div id="xField" class="input" style="display: none;">
-  <h3 class="Input-label" style="margin-bottom: 25px; display: block; width: 100%;">X/Twitter</h3>
-  <%= form.text_field :x, class: "Input-text" %>
-</div>
-
-<div id="youtubeField" class="input" style="display: none;">
-  <h3 class="Input-label" style="margin-bottom: 25px; display: block; width: 100%;">Youtube</h3>
-  <%= form.text_field :youtube, class: "Input-text" %>
-</div>
-
-
-  <!-- Add other fields as needed -->
-
-  <div style="margin-top: 20px;">
-    <button id="next-btn-2" type="button" class="button-1"> Next </button>
-  </div>
-</div>
-
-<!-- Third part -->
-<div id="third-part" style="display:none; margin-top: 30px;">
- <h1 style="font-size: 40px">Select the Style of your Linktree</h1>
-<div class="card-container">
-  <div class="grid">
- <div class="card" id="light-card" onclick="handleCardClick('light')">
-  <p>Light mode</p>
-  <%= form.radio_button :style, "light", style:"position: absolute; top: 0px; left:0px; width: 100%; height: 100%; opacity: 0; ", id:"light" %>
-</div>
-
-<div class="card dark-mode" id="dark-card" onclick="handleCardClick('dark')">
-  <%= form.radio_button :style, "dark", style:"position: absolute; top: 0px; left:0px; width: 100%; height: 100%; opacity: 0;", id:"dark" %>
-  <p>Dark Mode</p>
-</div>
-
-<div class="card rainbow-mode" id="rainbow-card" onclick="handleCardClick('rainbow')">
-  <%= form.radio_button :style, "rainbow", style:"position: absolute; top: 0px; left:0px; width: 100%; height: 100%; opacity: 0; ", id:"rainbow" %>
-  <p>Rainbow Mode</p>
-</div>
-
+      <div class="form-actions">
+        <button id="next-btn" type="button" class="button-1">Next</button>
+      </div>
     </div>
- 
-
-</div>
-
-  <!-- Add other link fields as needed -->
-
-  <div style="margin-top: 20px;">
-    <%= form.submit "Next", class: "button-1", id: "submit-btn" %>
   </div>
-</div>
 
-<!-- Back button -->
-<div style="margin-top: 20px;">
-  <button id="back-btn" type="button" class="button-1" style="display: none;"> Back </button>
+  <!-- Second part -->
+  <div id="second-part" class="form-section" style="display: none;">
+    <div class="form-container">
+      <h1 class="form-title">Jynx <span class="gradient-text">yourself</span></h1>
+      <p class="form-subtitle">Select the social platforms you want to showcase</p>
+
+      <div class="social-checkboxes">
+        <div class="checkbox-group">
+          <%= form.check_box :show_instagram, id: "showInstagramCheckbox", class: "custom-checkbox" %>
+          <%= form.label :show_instagram, "Instagram", class: "checkbox-label" %>
+        </div>
+        <div class="checkbox-group">
+          <%= form.check_box :show_youtube, id: "showYoutubeCheckbox", class: "custom-checkbox" %>
+          <%= form.label :show_youtube, "YouTube", class: "checkbox-label" %>
+        </div>
+        <div class="checkbox-group">
+          <%= form.check_box :show_x, id: "showXCheckbox", class: "custom-checkbox" %>
+          <%= form.label :show_x, "X (Twitter)", class: "checkbox-label" %>
+        </div>
+        <div class="checkbox-group">
+          <%= form.check_box :show_github, id: "showGithubCheckbox", class: "custom-checkbox" %>
+          <%= form.label :show_github, "Github", class: "checkbox-label" %>
+        </div>
+      </div>
+
+      <div id="instagramField" class="field social-field" style="display: none;">
+        <label class="field-label">Instagram</label>
+        <%= form.text_field :instagram, class: "field-input", placeholder:"https://instagram.com/yourhandle" %>
+      </div>
+
+      <div id="xField" class="field social-field" style="display: none;">
+        <label class="field-label">X/Twitter</label>
+        <%= form.text_field :x, class: "field-input", placeholder:"https://x.com/yourhandle" %>
+      </div>
+
+      <div id="youtubeField" class="field social-field" style="display: none;">
+        <label class="field-label">YouTube</label>
+        <%= form.text_field :youtube, class: "field-input", placeholder:"https://youtube.com/@yourchannel" %>
+      </div>
+
+      <div id="githubField" class="field social-field" style="display: none;">
+        <label class="field-label">Github</label>
+        <%= form.text_field :github, class: "field-input", placeholder:"https://github.com/@yourgithub" %>
+      </div>
+
+      <div class="form-actions">
+        <button id="next-btn-2" type="button" class="button-1">Next</button>
+        <button id="back-btn-2" type="button" class="button-secondary" style="display: none;">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Third part -->
+  <div id="third-part" class="form-section" style="display:none;">
+    <div class="form-container">
+      <h1 class="form-title">Select your <span class="gradient-text">Style</span></h1>
+      <p class="form-subtitle">Choose the perfect theme for your Linktree</p>
+
+      <div class="style-cards">
+        <div class="style-card light-theme" id="light-card" onclick="handleCardClick('light')">
+          <%= form.radio_button :style, "light", style:"position: absolute; top: 0px; left:0px; width: 100%; height: 100%; opacity: 0; ", id:"light" %>
+          <div class="card-content">
+            <div class="theme-preview light-preview"></div>
+            <p class="card-title">Light Mode</p>
+            <p class="card-description">Clean and minimal</p>
+          </div>
+        </div>
+
+        <div class="style-card dark-theme" id="dark-card" onclick="handleCardClick('dark')">
+          <%= form.radio_button :style, "dark", style:"position: absolute; top: 0px; left:0px; width: 100%; height: 100%; opacity: 0;", id:"dark" %>
+          <div class="card-content">
+            <div class="theme-preview dark-preview"></div>
+            <p class="card-title">Dark Mode</p>
+            <p class="card-description">Sleek and modern</p>
+          </div>
+        </div>
+
+        <div class="style-card midnight-theme" id="midnight-card" onclick="handleCardClick('midnight')">
+          <%= form.radio_button :style, "midnight", style:"position: absolute; top: 0px; left:0px; width: 100%; height: 100%; opacity: 0; ", id:"midnight" %>
+          <div class="card-content">
+            <div class="theme-preview midnight-preview"></div>
+            <p class="card-title">Midnight</p>
+            <p class="card-description">Deep and mysterious</p>
+          </div>
+        </div>
+
+        <div class="style-card blackstar-theme" id="blackstar-card" onclick="handleCardClick('blackstar')">
+          <%= form.radio_button :style, "blackstar", style:"position: absolute; top: 0px; left:0px; width: 100%; height: 100%; opacity: 0; ", id:"blackstar" %>
+          <div class="card-content">
+            <div class="theme-preview blackstar-preview"></div>
+            <p class="card-title">Black Star</p>
+            <p class="card-description">Bold and cosmic</p>
+          </div>
+        </div>
+
+        <div class="style-card purplehaze-theme" id="purplehaze-card" onclick="handleCardClick('purplehaze')">
+          <%= form.radio_button :style, "purplehaze", style:"position: absolute; top: 0px; left:0px; width: 100%; height: 100%; opacity: 0; ", id:"purplehaze" %>
+          <div class="card-content">
+            <div class="theme-preview purplehaze-preview"></div>
+            <p class="card-title">Purple Haze</p>
+            <p class="card-description">Dreamy and ethereal</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <%= form.submit "Create My Jynx", class: "button-1", id: "submit-btn" %>
+        <button id="back-btn-3" type="button" class="button-secondary">← Back</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- JavaScript to toggle visibility -->
 <script>
 function handleCardClick(style) {
-  // Remove the green box shadow from all cards
-  document.querySelectorAll('.card').forEach(function(card) {
-    card.style.boxShadow = 'none';
+  // Remove the selection from all cards
+  document.querySelectorAll('.style-card').forEach(function(card) {
+    card.classList.remove('selected');
   });
 
-  // Add the green box shadow to the selected card
-  document.getElementById(style + '-card').style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.7)';
+  // Add selection to the clicked card
+  document.getElementById(style + '-card').classList.add('selected');
+
+  // IMPORTANT: Actually check the radio button
+  document.getElementById(style).checked = true;
 }
 
-
-
-  $(document).ready(function() {
-
-  
-    $("#next-btn").on("click", function() {
-         var nameValue = $("#name").val();
-     if (nameValue.length > 3) {
-      
+$(document).ready(function() {
+  $("#next-btn").on("click", function() {
+    var nameValue = $("#name").val();
+    if (nameValue.length > 3) {
       $("#first-part").hide();
       $("#second-part").show();
-      $("#back-btn").show();
-    }
-    else {
-  
+      $("#back-btn-2").show();
+      // Add class for two-button layout
+      $("#second-part .form-actions").addClass("two-buttons");
+    } else {
       $("#name-text").show();
     }
-    });
-
-    $("#next-btn-2").on("click", function() {
-      $("#second-part").hide();
-      $("#third-part").show();
-            
-    });
-
-    $("#back-btn").on("click", function() {
-      if ($("#second-part").is(":visible")) {
-        $("#second-part").hide();
-        $("#first-part").show();
-      } else if ($("#third-part").is(":visible")) {
-        $("#third-part").hide();
-        $("#second-part").show();
-      }
-        if ($("#first-part").is(":visible")) {
-      $("#back-btn").hide();
-        }
-    });
-
-    $("#add-more-links-btn").on("click", function() {
-      $("#link_2").show();
-      $("#link_3").show();
-      // Show additional link fields as needed
-    });
   });
 
-      $("#tree-form").on("keydown", function(event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-      }
-    });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    const showInstagramCheckbox = document.getElementById("showInstagramCheckbox");
-    const showXCheckbox = document.getElementById("showXCheckbox");
-    const showYoutubeCheckbox = document.getElementById("showYoutubeCheckbox");
-
-
-    const instagramField = document.getElementById("instagramField");
-    const xField = document.getElementById("xField");
-    const youtubeField = document.getElementById("youtubeField");
-
-    showInstagramCheckbox.addEventListener("change", function() {
-      instagramField.style.display = showInstagramCheckbox.checked ? "block" : "none";
-    });
-
-    showYoutubeCheckbox.addEventListener("change", function() {
-      youtubeField.style.display = showYoutubeCheckbox.checked ? "block" : "none";
-    });
-        showXCheckbox.addEventListener("change", function() {
-      xField.style.display = showXCheckbox.checked ? "block" : "none";
-    });
-    // Repeat similar code for other checkboxes and fields
+  $("#next-btn-2").on("click", function() {
+    $("#second-part").hide();
+    $("#third-part").show();
+    // Add class for two-button layout
+    $("#third-part .form-actions").addClass("two-buttons");
   });
 
+  $("#back-btn-2").on("click", function() {
+    $("#second-part").hide();
+    $("#first-part").show();
+    $("#back-btn-2").hide();
+    // Remove class for single-button layout
+    $("#second-part .form-actions").removeClass("two-buttons");
+  });
 
+  $("#back-btn-3").on("click", function() {
+    $("#third-part").hide();
+    $("#second-part").show();
+    // Make sure second part has proper button layout
+    $("#second-part .form-actions").addClass("two-buttons");
+  });
+
+  $("#add-more-links-btn").on("click", function() {
+    $("#link_2").show();
+    $("#link_3").show();
+  });
+});
+
+$("#tree-form").on("keydown", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+  }
+});
+
+// Add this to your existing JavaScript section
+$("#tree-form").on("submit", function(event) {
+  // Debug: Check what style is selected
+  const selectedStyle = document.querySelector('input[name="tree[style]"]:checked');
+  if (selectedStyle) {
+    console.log("Selected style:", selectedStyle.value);
+  } else {
+    console.log("No style selected!");
+    // Optionally prevent submission if no style is selected
+    // event.preventDefault();
+    // alert("Please select a style before submitting");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const showInstagramCheckbox = document.getElementById("showInstagramCheckbox");
+  const showXCheckbox = document.getElementById("showXCheckbox");
+  const showYoutubeCheckbox = document.getElementById("showYoutubeCheckbox");
+  const showGithubCheckbox = document.getElementById("showGithubCheckbox");
+
+  const instagramField = document.getElementById("instagramField");
+  const xField = document.getElementById("xField");
+  const youtubeField = document.getElementById("youtubeField");
+  const githubField = document.getElementById("githubField");
+
+  showInstagramCheckbox.addEventListener("change", function() {
+    instagramField.style.display = showInstagramCheckbox.checked ? "block" : "none";
+  });
+
+  showYoutubeCheckbox.addEventListener("change", function() {
+    youtubeField.style.display = showYoutubeCheckbox.checked ? "block" : "none";
+  });
+
+  showXCheckbox.addEventListener("change", function() {
+    xField.style.display = showXCheckbox.checked ? "block" : "none";
+  });
+
+  showGithubCheckbox.addEventListener("change", function() {
+    githubField.style.display = showGithubCheckbox.checked ? "block" : "none";
+  });
+});
+
+function handleCardClick(style) {
+  // Remove the selection from all cards
+  document.querySelectorAll('.style-card').forEach(function(card) {
+    card.classList.remove('selected');
+  });
+
+  // Add selection to the clicked card
+  document.getElementById(style + '-card').classList.add('selected');
+}
 </script>
 
-
-<% end %>
-
 <style>
-:root {
-  --gutterMd: 0.8rem;
-  --colorPrimary800: #4527a0;
-  --fontFamily: "Dosis", sans-serif;
-  --fontSizeLg: 1.6rem;
-  --lineHeightMd: 1.3;
-  --transitionDuration: 300ms;
-  --transitionTF: cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-  .inline-form-group {
-    display: inline-block;
-    margin-right: 20px; /* Adjust the margin as needed */
-    vertical-align: top; /* Align elements to the top */
-  }
-.Input {
-  position: relative;
-  margin-top: 20px;
-}
-
-.Input-text {
-  
+/* Tree Form Styling - Matching Devise Theme */
+.tree-form-page {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a0a 100%);
   margin: 0;
-  padding: var(--gutterMd);
-  color: black;
-  width: 60%;
-  font-family: inherit;
-  font-size: var(--fontSizeLg);
-  font-weight: inherit;
-  line-height: var(--lineHeightMd);
-  border: 1px solid black;
-  border-radius: 0.4rem;
-  transition: box-shadow var(--transitionDuration);
-  background-color: white;; /* Darker input background */
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  min-height: 100vh;
+  color: #ffffff;
+  position: relative;
+  overflow-x: hidden;
+  padding: 0;
 }
 
-.Input-text::placeholder {
-  color: #B0BEC5;
+/* Override body background only for this page */
+body:has(.tree-form-page) {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a0a 100%) !important;
+  margin: 0;
 }
 
-.Input-text:focus {
+.tree-form-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(139, 69, 196, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 70%, rgba(75, 0, 130, 0.06) 0%, transparent 50%),
+              radial-gradient(circle at 40% 90%, rgba(139, 69, 196, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.tree-form-page::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100vh;
+  background: linear-gradient(90deg, 
+      rgba(139, 69, 196, 0.12) 0%, 
+      rgba(139, 69, 196, 0.08) 30%, 
+      transparent 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.tree-form-page .right-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 100vh;
+  background: linear-gradient(270deg, 
+      rgba(139, 69, 196, 0.12) 0%, 
+      rgba(139, 69, 196, 0.08) 30%, 
+      transparent 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.form-container {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 69, 196, 0.1);
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+}
+
+.form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  border-radius: 16px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.form-title {
+  font-size: 48px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff, #c0c0c0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin-bottom: 10px;
+  position: relative;
+  line-height: 1.2;
+}
+
+.form-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(135deg, #8b45c4, #4b0082);
+  border-radius: 2px;
+}
+
+.form-subtitle {
+  font-size: 16px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, 
+      rgba(20, 20, 20, 0.9) 0%,
+      rgba(40, 40, 40, 0.85) 20%,
+      rgba(75, 0, 130, 0.8) 60%,
+      rgba(139, 69, 196, 0.9) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.field {
+  margin-bottom: 25px;
+}
+
+.field-label {
+  display: block;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.field-input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid rgba(139, 69, 196, 0.3);
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.field-input:focus {
   outline: none;
-  box-shadow: 0.2rem 0.8rem 1.6rem var(--colorPrimary800);
+  border-color: rgba(139, 69, 196, 0.6);
+  box-shadow: 0 0 0 3px rgba(139, 69, 196, 0.2);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.Input-label {
-font-size: 25px;
-
-
+.field-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
-
-
-
-.dark-mode
-{
-  color: white;
-  background-color: black;
+.button-1 {
+  background: linear-gradient(135deg, #8b45c4, #4b0082) !important;
+  color: white !important;
+  text-decoration: none;
+  padding: 15px 30px !important;
+  border: 1px solid rgba(139, 69, 196, 0.3) !important;
+  border-radius: 8px !important;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(139, 69, 196, 0.3) !important;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  display: block !important;
+  margin-bottom: 15px;
 }
-@keyframes rainbow {
-  0% {
-    background-position: 0% 50%;
+
+.button-1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.button-1:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(139, 69, 196, 0.5) !important;
+  background: linear-gradient(135deg, #9d52d4, #5a0a96) !important;
+}
+
+.button-1:hover::before {
+  left: 100%;
+}
+
+.button-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(139, 69, 196, 0.3);
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(139, 69, 196, 0.2);
+}
+
+.button-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.button-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 69, 196, 0.4);
+}
+
+.button-secondary:hover::before {
+  left: 100%;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* When both buttons are present, show them side by side on larger screens */
+.form-actions.two-buttons {
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.error-text {
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 10px;
+  color: #ff6b6b;
+  backdrop-filter: blur(10px);
+  font-size: 14px;
+}
+
+.error-messages {
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: #ff6b6b;
+  backdrop-filter: blur(10px);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 100;
+  top: 20px;
+}
+
+.error-messages h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #ff6b6b;
+}
+
+.error-messages ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.error-messages li {
+  margin-bottom: 5px;
+}
+
+/* Social Media Checkboxes */
+.social-checkboxes {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: #8b45c4;
+}
+
+.checkbox-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.social-field {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Fix for delete button - remove unwanted div wrapper */
+.container > div:last-child {
+  text-align: center;
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Ensure all buttons in the navigation area are properly styled */
+.container > div:last-child a,
+.container > div:last-child input[type="submit"],
+.container > div:last-child form {
+  display: inline-block;
+  margin: 0;
+}
+
+/* Remove default form styling for button_to forms */
+.container > div:last-child form {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Style Cards */
+.style-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.style-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(139, 69, 196, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  /* FIXED: Consistent height and proper flex layout */
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-preview {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.style-card:hover {
+  border-color: rgba(139, 69, 196, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(139, 69, 196, 0.2);
+}
+
+.style-card.selected {
+  border-color: #8b45c4;
+  box-shadow: 0 0 20px rgba(139, 69, 196, 0.4);
+  background: rgba(139, 69, 196, 0.1);
+}
+
+.theme-preview {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  margin: 0 auto 12px;
+  position: relative;
+}
+
+.light-preview {
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  border: 1px solid #e0e0e0;
+}
+
+.dark-preview {
+  background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+  border: 1px solid #333;
+}
+
+.midnight-preview {
+  background: linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e);
+  border: 1px solid #0a0a1a;
+  position: relative;
+}
+
+.midnight-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+              radial-gradient(circle at 30% 80%, rgba(65, 105, 225, 0.2) 0%, transparent 50%);
+  border-radius: 7px;
+}
+
+.blackstar-preview {
+  background: linear-gradient(135deg, #000000, #1a1a1a, #2d2d2d);
+  border: 1px solid #111111;
+  position: relative;
+}
+
+.blackstar-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 20%, transparent 40%),
+              radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 30%),
+              radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 30%);
+  border-radius: 7px;
+}
+
+.purplehaze-preview {
+  background: linear-gradient(135deg, #4a148c, #6a1b9a, #8e24aa, #ab47bc);
+  border: 1px solid #3a0f6b;
+  position: relative;
+}
+
+.purplehaze-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(186, 104, 200, 0.4) 0%, transparent 60%),
+              radial-gradient(circle at 50% 50%, rgba(156, 39, 176, 0.2) 0%, transparent 70%);
+  border-radius: 7px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.card-description {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Mobile responsiveness for form actions */
+@media only screen and (max-width: 768px) {
+  .form-actions {
+    flex-direction: column;
+    gap: 15px;
   }
-  50% {
-    background-position: 100% 50%;
+  
+  .form-actions.two-buttons {
+    flex-direction: column;
   }
-  100% {
-    background-position: 0% 50%;
+  
+  .style-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .style-card {
+    height: 120px;
+  }
+  
+  .theme-preview {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .card-title {
+    font-size: 13px;
+  }
+  
+  .card-description {
+    font-size: 10px;
   }
 }
 
-.rainbow-mode {
-  color: white;
-  background: linear-gradient(90deg, violet, indigo, blue, green, yellow, orange, red);
-  background-size: 150% 150%;
-  animation: rainbow 5s infinite; /* Adjust the duration as needed */
+@media only screen and (max-width: 480px) {
+  .style-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .style-card {
+    height: 100px;
+  }
+  
+  .container > div:last-child {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>
+
+<% end %>
