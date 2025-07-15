@@ -1,60 +1,68 @@
 <%= stylesheet_link_tag "devise" %>
 
-<div class="row">
+<div class="devise-page">
+  <div class="right-sidebar"></div>
+  
+  <div class="row">
     <div class="column column-65">
-<p style="font-size: 48px; font-weight: bold; text-align:center; margin-bottom: 10px;">Edit <%= resource_name.to_s.humanize %></p>
+      <p class="form-title">Edit <%= resource_name.to_s.humanize %></p>
+      
+      <div class="form">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="form">
+          <div class="field">
+            <%= f.label :email, class: "field-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field-input" %>
+          </div>
 
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div style="color: rgba(255, 193, 7, 0.9); padding: 10px; margin-bottom: 15px; font-size: 14px;">
+              Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+            </div>
+          <% end %>
 
+          <div class="field">
+            <%= f.label :password, class: "field-label" %>
+            <% if @minimum_password_length %>
+            <!-- <em>(<%= @minimum_password_length %> characters minimum)</em> -->
+            <% end %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "field-input" %>
+          </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="field">
+            <%= f.label :password_confirmation, class: "field-label" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "field-input" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field-input" %>
-  </div>
+          <div class="field">
+            <%= f.label :current_password, class: "field-label" %>
+            <div style="color: rgba(255, 255, 255, 0.6); font-size: 12px; margin-bottom: 8px; font-style: italic;">
+              (we need your current password to confirm your changes)
+            </div>
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "field-input" %>
+          </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <!-- <em>(<%= @minimum_password_length %> characters minimum)</em> -->
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", class: "field-input" %>
-  </div>
+          <div class="actions" style="text-align: center;">
+            <%= f.submit "Save changes", class: "button-1", style: "width: 70%; margin: 0 auto;" %>
+          </div>
 
-<div class="field">
-    <%= f.label :password_confirmation, class: "field-label" %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "field-input" %>
-</div>
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password", class: "field-input" %>
-  </div>
+        <% end %>
 
-  <div class="actions">
-    <%= f.submit "Save changes", class:"button-1", style:"width: 70%;" %>
-  </div>
-
-<% end %>
-
-
-<div>Unhappy? <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>  
-
-        <!-- Content for the first column goes here -->
+        <div style="text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(139, 69, 196, 0.1);">
+          <div style="margin-bottom: 15px;">
+            <%= button_to "Delete my account", registration_path(resource_name), 
+                data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, 
+                method: :delete, 
+                style: "background: linear-gradient(135deg, #dc3545, #c82333); color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 14px; transition: all 0.3s ease;" %>
+          </div>
+          <%= link_to "Back", :back, style: "color: rgba(139, 69, 196, 0.9); text-decoration: none; font-weight: 500; font-size: 14px;" %>
+        </div>
+        
+        <div class="devise-links">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
     </div>
-      <div style="text-align: center; margin-top: 10px;">
-  <%= render "devise/shared/links" %>
   </div>
-    </div>
-    <div class="column column-35">
-        <h2>Column 2 (35%)</h2>
-        <!-- Content for the second column goes here -->
-    </div>
 </div>
