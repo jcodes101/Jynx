@@ -32,3 +32,19 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore encrypted credentials
+/config/credentials.yml.enc
+
+# Ignore database config (contains credentials)
+/config/database.yml
+
+# Ignore deployment and cloud secrets
+rails_website_credentials.txt
+*.keyfile
+
+# Ignore editor, OS, and debug history files
+.DS_Store
+Thumbs.db
+.byebug_history
+.pry_history
