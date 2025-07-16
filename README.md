@@ -4,6 +4,11 @@ Jynx is a modern Ruby on Rails web application that functions as a **link tree-e
 
 This project blueprint outlines the architecture, key features, and deployment details for developers and contributors.
 
+## Preview Jynx Here
+
+[![Watch the demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://youtu.be/tSgUu3bHlE4)
+
+
 ---
 
 ## 🚀 Overview
