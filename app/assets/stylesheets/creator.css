@@ -133,6 +133,7 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
+    justify-content: center;
 }
 
 .creator .github-link::before {
