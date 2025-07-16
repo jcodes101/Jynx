@@ -6,7 +6,7 @@ This project blueprint outlines the architecture, key features, and deployment d
 
 ## Preview Jynx Here
 
-[![Watch the demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://youtu.be/tSgUu3bHlE4)
+Watch Here: (https://youtu.be/tSgUu3bHlE4)
 
 
 ---
