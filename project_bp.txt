@@ -1,0 +1,87 @@
+J_TREE PROJECT BLUEPRINT
+
+Overview:
+This project is a Ruby on Rails web application designed to manage and visualize hierarchical data structures, specifically 'trees'. It includes user authentication, CRUD operations for trees, and a modern frontend with asset management. The app is containerized for deployment and supports PWA features.
+
+Architecture:
+- **Backend:** Ruby on Rails (MVC pattern)
+- **Frontend:** Rails views (ERB), CSS, JavaScript (with importmap)
+- **Database:** Likely PostgreSQL or SQLite (configurable in `config/database.yml`)
+- **Authentication:** Devise gem for user management
+- **Deployment:** Docker, Fly.io, Render
+
+Key Functionalities:
+1. **User Authentication:**
+   - Devise integration for registration, login, password management.
+   - User model (`app/models/user.rb`) and related views/controllers.
+
+2. **Tree Management:**
+   - CRUD operations for trees via `TreesController` (`app/controllers/trees_controller.rb`).
+   - Tree model (`app/models/tree.rb`) with attributes and relationships.
+   - Slug support for friendly URLs (`add_slug_to_trees` migration).
+
+3. **Frontend/UI:**
+   - Views for home, trees, layouts, and authentication (`app/views/`).
+   - Custom stylesheets for different pages (`app/assets/stylesheets/`).
+   - JavaScript controllers for dynamic UI (`app/javascript/controllers/`).
+   - Image assets for UI elements (`app/assets/images/`).
+
+4. **PWA Support:**
+   - PWA-related views and assets (`app/views/pwa/`).
+   - Manifest and icons in `public/`.
+
+5. **Deployment & Configuration:**
+   - Dockerfile for containerization.
+   - Fly.io and Render configuration files (`fly.toml`, `render.yaml`).
+   - Environment-specific configs in `config/environments/`.
+
+6. **Background Jobs & Mailers:**
+   - Job classes in `app/jobs/` for async tasks.
+   - Mailers in `app/mailers/` for notifications.
+
+7. **Testing:**
+   - System, model, and controller tests in `test/`.
+   - Fixtures for sample data.
+
+8. **Security & Credentials:**
+   - Encrypted credentials (`config/credentials.yml.enc`, `config/master.key`).
+   - Content Security Policy (`config/initializers/content_security_policy.rb`).
+
+How It Works:
+1. **Startup:**
+   - Rails loads configuration from `config/`.
+   - Database migrations ensure schema is up-to-date.
+   - Assets are precompiled for production.
+
+2. **User Flow:**
+   - Users sign up/sign in via Devise.
+   - Authenticated users can create, view, edit, and delete trees.
+   - Trees are displayed in hierarchical views, possibly with interactive JS.
+
+3. **Routing:**
+   - Defined in `config/routes.rb` for RESTful endpoints.
+
+4. **Deployment:**
+   - Docker builds the app image.
+   - Fly.io/Render deploys the container.
+
+Key Files & Their Roles:
+- `app/models/tree.rb`: Tree data structure and logic.
+- `app/controllers/trees_controller.rb`: Handles tree CRUD actions.
+- `app/views/trees/`: Templates for tree pages.
+- `app/models/user.rb`: User authentication and profile.
+- `app/controllers/home_controller.rb`: Landing page logic.
+- `config/routes.rb`: URL routing.
+- `Dockerfile`, `fly.toml`, `render.yaml`: Deployment configs.
+- `app/assets/`: Images and stylesheets for UI.
+- `app/javascript/`: JS for interactivity.
+
+Summary of Key Technologies Used:
+- Ruby on Rails
+- Devise (authentication)
+- Importmap (JS management)
+- Docker (containerization)
+- Fly.io, Render (cloud deployment)
+- PWA standards
+
+This blueprint provides a high-level overview of the project's structure, main features, and how the codebase is organized to deliver its core functionalities.

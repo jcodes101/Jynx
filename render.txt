@@ -1,0 +1,5 @@
+Region
+Oregon (US West)
+
+ID_URL
+postgresql://jynx_render_db_user:hxS6mvEXcRTTfTjziNfY8m4n5C7Bjq2X@dpg-d1rd0cili9vc73b3aqb0-a/jynx_render_db
