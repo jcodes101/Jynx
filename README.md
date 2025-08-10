@@ -6,7 +6,7 @@ This project blueprint outlines the architecture, key features, and deployment d
 
 ## Preview Jynx Here
 
-Watch Here: (https://youtu.be/tSgUu3bHlE4)
+Watch Here: (https://www.linkedin.com/posts/jadin-hutchinson-a175a52ba_ruby-rubyonrails-devise-activity-7351261901646888962-sICS?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAEyeLXMBknAGGadqYvUtUx9j_XL4fpIZKeg)
 
 
 ---
