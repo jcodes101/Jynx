@@ -5,7 +5,7 @@ services:
     plan: free
     buildCommand: "./bin/render-build.sh"
     # db:prepare needs DATABASE_URL + RAILS_MASTER_KEY (set in dashboard)
-    startCommand: "bin/rails db:prepare && SOLID_QUEUE_IN_PUMA=true bin/rails server -b 0.0.0.0"
+    startCommand: "bin/rails db:prepare && bin/rails server -b 0.0.0.0"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -13,10 +13,6 @@ services:
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
-      - key: SOLID_QUEUE_IN_PUMA
-        value: "true"
-      - key: WEB_CONCURRENCY
-        value: "1"
       - key: APP_HOST
         sync: false
 databases:
