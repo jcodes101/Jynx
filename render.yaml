@@ -4,7 +4,8 @@ services:
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
-    startCommand: "SOLID_QUEUE_IN_PUMA=true ./bin/rails server"
+    # db:prepare needs DATABASE_URL + RAILS_MASTER_KEY (set in dashboard)
+    startCommand: "bin/rails db:prepare && SOLID_QUEUE_IN_PUMA=true bin/rails server -b 0.0.0.0"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
