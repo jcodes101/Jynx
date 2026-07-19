@@ -6,4 +6,5 @@ bundle install
 bin/rails assets:precompile
 bin/rails assets:clean
 
-bin/rails db:migrate
+# db:prepare migrates primary and loads Solid cache/queue/cable schemas
+bin/rails db:prepare

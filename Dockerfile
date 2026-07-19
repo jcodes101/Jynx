@@ -3,7 +3,7 @@
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
 # docker build -t j_tree .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name j_tree j_tree
+# docker run -d -p 8080:8080 -e RAILS_MASTER_KEY=<value from config/master.key> -e DATABASE_URL=... --name j_tree j_tree
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
@@ -23,7 +23,9 @@ RUN apt-get update -qq && \
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development" \
+    PORT="8080" \
+    SOLID_QUEUE_IN_PUMA="true"
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
@@ -72,8 +74,7 @@ USER 1000:1000
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Start server via Thruster by default, this can be overwritten at runtime
-EXPOSE 80
-# EXPOSE 8080
+# Start server via Thruster by default (listens on PORT, default 8080 for Fly).
+# This can be overwritten at runtime.
+EXPOSE 8080
 CMD ["./bin/thrust", "./bin/rails", "server"]
-# CMD ["./bin/thrust", "./bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]

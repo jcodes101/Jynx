@@ -1,8 +1,11 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.require_master_key = false
   # Settings specified here will take precedence over those in config/application.rb.
+
+  # Require the master key so credentials / secret_key_base decrypt in production.
+  # Provide it via RAILS_MASTER_KEY (Fly secrets, Render env, Kamal secrets).
+  config.require_master_key = true
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
@@ -32,7 +35,7 @@ Rails.application.configure do
   config.force_ssl = true
 
   # Skip http-to-https redirect for the default health check endpoint.
-  # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
+  config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
   # Log to STDOUT with the current request id as a default log tag.
   config.log_tags = [ :request_id ]
@@ -58,8 +61,11 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  # Host used in mailer links (password reset, confirmations). Set APP_HOST on the platform.
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch("APP_HOST", "jynx.fly.dev"),
+    protocol: "https"
+  }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {
@@ -80,12 +86,12 @@ Rails.application.configure do
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
 
-  # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  #
+  # DNS rebinding protection. Set APP_HOST (and optionally APP_HOSTS comma-separated).
+  if (app_host = ENV["APP_HOST"]).present?
+    config.hosts << app_host
+  end
+  ENV.fetch("APP_HOSTS", "").split(",").each { |host| config.hosts << host.strip if host.strip.present? }
+
   # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end

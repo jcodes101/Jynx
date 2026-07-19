@@ -9,6 +9,7 @@
 
 # Ignore all environment files.
 /.env*
+!/.env.example
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -33,14 +34,15 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-# Ignore encrypted credentials
-/config/credentials.yml.enc
+# Encrypted credentials are committed; only master.key stays private.
+# /config/credentials.yml.enc
 
-# Ignore database config (contains credentials)
-/config/database.yml
+# database.yml is committed without secrets (uses ENV in production).
+# Local overrides: DATABASE_USERNAME / DATABASE_PASSWORD / DATABASE_HOST
 
 # Ignore deployment and cloud secrets
 rails_website_credentials.txt
+render.txt
 *.keyfile
 
 # Ignore editor, OS, and debug history files

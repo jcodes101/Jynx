@@ -21,11 +21,10 @@ Jynx helps users create and manage visual link trees with user authentication, a
 
 - **Backend:** Ruby on Rails (MVC pattern)
 - **Frontend:** ERB views, SCSS/CSS, JavaScript (via importmap)
-- **Database:** PostgreSQL / SQLite (configurable via `database.yml`)
+- **Database:** PostgreSQL (required in production via `DATABASE_URL`)
 - **Authentication:** Devise gem
 - **Deployment:** Dockerized; supports Fly.io & Render
-- **PWA Support:** Installable experience for mobile/desktop
-
+- **Jobs / cache / cable:** Solid Queue, Solid Cache, Solid Cable (same Postgres)
 ---
 
 ## ✨ Key Functionalities
@@ -86,8 +85,10 @@ Jynx helps users create and manage visual link trees with user authentication, a
    - RESTful routes in `config/routes.rb`
 
 4. **Deployment**  
-   - Build with Docker  
-   - Deploy via Fly.io or Render with minimal setup
+   - Build with Docker (`Dockerfile`)
+   - Deploy via **Fly.io** (`fly.toml`) or **Render** (`render.yaml`)
+   - Required secrets: `RAILS_MASTER_KEY`, `DATABASE_URL` (platform Postgres)
+   - See deploy steps in the project chat / `fly.toml` + `render.yaml` env vars (`SOLID_QUEUE_IN_PUMA`, `APP_HOST`)
 
 ---
 
